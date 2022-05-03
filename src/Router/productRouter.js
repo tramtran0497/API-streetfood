@@ -1,9 +1,11 @@
 const express = require("express")
-const router = express.Router()
+const Product = require("../Models/Product")
+const router = new express.Router()
 
 router.get("/products", async(req, res) => {
     try{
-        res.send("All products")
+        const products = await Product.find()
+        res.send(products)
     }catch(error) {
         res.status(400).send(error.message)
     }
@@ -19,8 +21,10 @@ router.get("/product/:id", async(req, res) => {
 })
 
 router.post("/products", async(req, res) => {
+    const product = new Product(req.body)
     try{
-        res.send("Create a product")
+        await product.save()
+        res.send(product)
     }catch(error) {
         res.status(400).send(error.message)
     }
