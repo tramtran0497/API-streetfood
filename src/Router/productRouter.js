@@ -14,7 +14,8 @@ router.get("/products", async(req, res) => {
 router.get("/product/:id", async(req, res) => {
     const {id} = req.params
     try{
-        res.send("A product")
+        const product = await Product.findById(id)
+        res.send(product)
     }catch(error) {
         res.status(400).send(error.message)
     }
@@ -32,8 +33,16 @@ router.post("/products", async(req, res) => {
 
 router.put("/product/:id", async(req, res) => {
     const {id} = req.params
+    const updateList = Object.keys(req.body)
+    const allowUpdate = ["name", "type", "size", "price", "extra", "description", "ingredients"]
+
+    const isValidOperation = updateList.every((update) => allowUpdate.includes(update))
+    if(!isValidOperation) return res.status(400).send("Invalid updates!")
     try{
-        res.send("Change a product")
+        const product = await Product.findById(id)
+        updateList.forEach(update => product[update] = req.body[update])
+        await product.save()
+        res.send(product)
     }catch(error) {
         res.status(400).send(error.message)
     }
@@ -41,7 +50,8 @@ router.put("/product/:id", async(req, res) => {
 
 router.delete("/product/:id", async(req, res) => {
     const {id} = req.params
-    try{
+    try{ 
+        const product = await Product.findByIdAndRemove(id)
         res.send("Delete a product")
     }catch(error) {
         res.status(400).send(error.message)
