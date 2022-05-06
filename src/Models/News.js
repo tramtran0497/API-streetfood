@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const newSlidesSchema = new mongoose.Schema({
+const newsSchema = new mongoose.Schema({
     title:{
         required: true,
         type: String,
@@ -15,6 +15,6 @@ const newSlidesSchema = new mongoose.Schema({
     }, 
 })
 
-const NewSlides = mongoose.model("NewSlides", newSlidesSchema)
+const News = mongoose.model("News", newsSchema)
 
-module.exports = NewSlides
+module.exports = News
