@@ -11,6 +11,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
         type: String,
         trim: true,
+        minlength: [4, "The name is too short, at least 4 characters"]
     }, 
     addressPoint:{
         required: true,
@@ -18,12 +19,12 @@ const orderSchema = new mongoose.Schema({
         trim: true,
     }, 
     timeOrder:{
-        required: true,
         type: Date,
+        default: () => new Date().toGMTString()
     },
     timeTakeOrder:{
         required: true,
-        type: Date,
+        type: String,
     },
     status:{
         required: true,
@@ -47,7 +48,15 @@ const orderSchema = new mongoose.Schema({
             required: true,
             type: Number,
         },
+        price: {
+            required: true,
+            type: Number,
+        }
     }],
+    totalPrice: {
+        required: true,
+        type: Number,
+    },
     
 })
 

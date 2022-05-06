@@ -50,6 +50,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
     },
     DOB:{
+        required: true,
         type: String,
         format: Date,
     },
