@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const eventsSchema = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
     title:{
         required: true,
         type: String,
@@ -20,6 +20,6 @@ const eventsSchema = new mongoose.Schema({
     },
 })
 
-const Events = mongoose.model("Events", eventsSchema)
+const Event = mongoose.model("Event", eventSchema)
 
-module.exports = Events
+module.exports = Event

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const validator = require('validator')
 
-const jobsSchema = new mongoose.Schema({
+const jobSchema = new mongoose.Schema({
     title:{
         required: true,
         type: String,
@@ -18,6 +18,6 @@ const jobsSchema = new mongoose.Schema({
     }],
 })
 
-const Jobs = mongoose.model("Jobs", jobsSchema)
+const Job = mongoose.model("Job", jobSchema)
 
-module.exports = Jobs
+module.exports = Job
